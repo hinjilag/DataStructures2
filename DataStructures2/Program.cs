@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             MyList myList = new MyList();
-            int[] ints = new int[] { 99, 89, 79 };
+            int[] ints = new int[] { 12, 77, 49 };
             myList.Add(1);
             myList.Add(2);
             myList.Add(3);
