@@ -4,15 +4,20 @@
     {
         static void Main(string[] args)
         {
-            SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
-            SinglyLinkedListWithTail singlyLinkedListWithTail = new SinglyLinkedListWithTail();
-            singlyLinkedListWithTail.PushFront(9);
-            singlyLinkedListWithTail.PushFront(4);
-            singlyLinkedListWithTail.PushFront(2);
+            //SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+            //SinglyLinkedListWithTail singlyLinkedListWithTail = new SinglyLinkedListWithTail();
+            //singlyLinkedListWithTail.PushFront(9);
+            //singlyLinkedListWithTail.PushFront(4);
+            //singlyLinkedListWithTail.PushFront(2);
 
-            Node node = new Node(4);
-            singlyLinkedListWithTail.AddAfter(node, 1);
+            //Node node = new Node(4);
+            //singlyLinkedListWithTail.AddAfter(node, 1);
 
+            SinglyCircularLinkedList singlyCircularLinkedList = new SinglyCircularLinkedList();
+            Node node = singlyCircularLinkedList.Find(1); // Получить узел, значение которого равно 7
+            node = singlyCircularLinkedList.Find(2); // Получить узел, значение которого равно 1
+            int count = singlyCircularLinkedList.GetCount(); // Получить количество элементов 
+            Console.WriteLine(count); 
         }
 
 
@@ -96,7 +101,7 @@
                 return current;
             }
         }
-        class SinglyLinkedListWithTail
+        public class SinglyLinkedListWithTail
         {
             public Node Head;
             public Node Tail;
@@ -238,6 +243,67 @@
 
                     count--;
                 }
+            }
+        }
+
+        public class SinglyCircularLinkedList
+        {
+            public Node Tail;
+            private int count = 0;
+
+            public int GetCount()
+            {
+                return count;
+            }
+
+            public string Print()
+            {
+                if (count == 0)
+                {
+                    return string.Empty;
+                }
+
+                return Print(Tail.Next);
+            }
+
+            public string Print(Node node)
+            {
+                if (count == 0)
+                {
+                    return string.Empty;
+                }
+
+                string result = "";
+                Node current = node;
+                do
+                {
+                    result += current.Value + " ";
+                    current = current.Next;
+                } while (current != node);
+
+                return result;
+            }
+
+            public Node Find(int key)
+            {
+                if (count == 0)
+                {
+                    return null;
+                }
+
+                Node current = Tail.Next;
+                do
+                {
+                    if (current.Value == key)
+                    {
+                        return current;
+                    }
+
+                    current = current.Next;
+                }
+                while (current != Tail.Next);
+
+                return null;
             }
         }
     }
