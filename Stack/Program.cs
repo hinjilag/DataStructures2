@@ -4,15 +4,39 @@
     {
         static void Main(string[] args)
         {
-            StackOnArray stackArray = new StackOnArray();
-            StackOnLinkedList stackLinked = new StackOnLinkedList();
-            stackLinked.Push(1);
-            stackLinked.Push(2);
-            stackLinked.Push(3);
-            stackLinked.Pop();
-            Console.WriteLine(stackLinked.Print()); 
+            string data = Console.ReadLine();
+            int lastInt;
+            int secondLastInt;
+
+            Stack<int> ints = new Stack<int>();
+            foreach (char item in data)
+            {
+                if (char.IsDigit(item))
+                {
+                    ints.Push(item - '0');
+                }
+                else
+                {                    
+                    lastInt = ints.Pop();
+                    secondLastInt = ints.Pop();
+                    if (item == '+')
+                    {
+                        ints.Push(secondLastInt - '0' + lastInt - '0');
+                    }
+                    else if (item == '-')
+                    {
+                        ints.Push(secondLastInt - '0' - lastInt - '0');
+                    }
+                    if (item == '*')
+                    {
+                        ints.Push(secondLastInt - '0' * lastInt - '0');
+                    }
+                }
+            }
+            Console.WriteLine(ints.Peek);
         }
     }
+
     public class StackOnArray
     {
         private int[] items;
