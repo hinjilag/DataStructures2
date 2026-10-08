@@ -93,7 +93,6 @@
             size = 0;
         }
     }
-
     public class StackOnLinkedList
     {
         private LinkedList<int> items;
